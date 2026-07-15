@@ -31,7 +31,7 @@
   "projects": [
     {
       "title": "Compro2",
-      "description": "These are my files and activities i worked on Computer Programming.2 during my learning of java.",
+      "description": "These are my files and activities i worked on Computer Programming 2 during my learning of Java.",
       "image": "compro.jpg",
       "tags": [
         "Java",
@@ -42,7 +42,7 @@
     },
     {
       "title": "Object-Oriented Programming",
-      "description": "These are the files and activities while learning Object-Oriented Programming here in lorma.",
+      "description": "These are the files and activities while learning Object-Oriented Programming here in Lorma.",
       "image": "oop.png",
       "tags": [
         "Java",
