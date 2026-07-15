@@ -56,21 +56,21 @@ const fallbackPortfolioData = {
         {
             "title": "Compro2",
             "description": "These are my files and activities i worked on Computer Programming 2 during my learning of Java.",
-            "image": "compro.jpg",
+            "image": "assets/compro.jpg",
             "tags": ["Java", "Programming", "Activities"],
             "link": "https://github.com/Maryx23/COMPRO2"
         },
         {
             "title": "Object-Oriented Programming",
             "description": "These are the files and activities while learning Object-Oriented Programming here in Lorma.",
-            "image": "oop.png",
+            "image": "assets/oop.png",
             "tags": ["Java", "OOP", "Lorma Colleges"],
             "link": "https://github.com/Maryx23/oop-2026"
         },
         {
             "title": "Web Development",
             "description": "These are my files in Web development while learning about it.",
-            "image": "webdev.png",
+            "image": "assets/webdev.png",
             "tags": ["HTML", "CSS", "JavaScript", "Web Dev"],
             "link": "https://github.com/Maryx23/webdev1"
         }
@@ -115,7 +115,7 @@ const fallbackPortfolioData = {
     ]
 };
 
-fetch('data.json')
+fetch('data/data.json')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response error');
@@ -169,10 +169,11 @@ function populateProjects(projects) {
     if (grid) {
         grid.innerHTML = projects.map(proj => {
             const tagsHtml = proj.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('');
+            const imagePath = proj.image.startsWith('assets/') ? proj.image : `assets/${proj.image}`;
             return `
                 <article class="project-card">
                     <div class="project-img-wrapper">
-                        <img src="${proj.image}" alt="${proj.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" loading="lazy">
+                        <img src="${imagePath}" alt="${proj.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" loading="lazy">
                         <div class="img-fallback" style="display:none; width:100%; height:100%; background:#e2e8f0; align-items:center; justify-content:center; color:#64748b; font-size:0.9rem;">💻 No Image found</div>
                     </div>
                     <div class="project-details">
