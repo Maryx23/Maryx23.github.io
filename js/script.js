@@ -25,7 +25,6 @@ if (contactForm) {
     contactForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        // Prevent duplicating success message on multiple clicks
         const existingMessage = contactForm.querySelector('.form-feedback');
         if (existingMessage) {
             existingMessage.remove();
@@ -42,10 +41,84 @@ if (contactForm) {
 
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
+const fallbackPortfolioData = {
+    "skills": {
+        "general": ["Basic Coding"],
+        "technical": [
+            { "name": "Java", "level": "60%" },
+            { "name": "HTML", "level": "50%" },
+            { "name": "CSS", "level": "40%" },
+            { "name": "JavaScript", "level": "30%" }
+        ],
+        "soft": ["Communication", "Problem Solving", "Critical Thinking", "Adaptability"]
+    },
+    "projects": [
+        {
+            "title": "Compro2",
+            "description": "These are my files and activities i worked on Computer Programming 2 during my learning of Java.",
+            "image": "compro.jpg",
+            "tags": ["Java", "Programming", "Activities"],
+            "link": "https://github.com/Maryx23/COMPRO2"
+        },
+        {
+            "title": "Object-Oriented Programming",
+            "description": "These are the files and activities while learning Object-Oriented Programming here in Lorma.",
+            "image": "oop.png",
+            "tags": ["Java", "OOP", "Lorma Colleges"],
+            "link": "https://github.com/Maryx23/oop-2026"
+        },
+        {
+            "title": "Web Development",
+            "description": "These are my files in Web development while learning about it.",
+            "image": "webdev.png",
+            "tags": ["HTML", "CSS", "JavaScript", "Web Dev"],
+            "link": "https://github.com/Maryx23/webdev1"
+        }
+    ],
+    "educationExperience": [
+        {
+            "role": "Bachelor of Science in Information Technology",
+            "organization": "Lorma Colleges - San Juan",
+            "period": "2026 - Present",
+            "description": "First year student currently enrolled in BSIT."
+        },
+        {
+            "role": "Orientation on Work Immersion",
+            "organization": "Speaker/s: Ms. Jessyree J. Tano / Mr. Joevan Ballesteros",
+            "period": "January 24, 2025",
+            "description": "Seminar and Workshop Entry"
+        },
+        {
+            "role": "Career Guidance Program",
+            "organization": "Sponsors: Guidance Counseling Office",
+            "period": "January 22, 2025",
+            "description": "Seminar and Workshop Entry"
+        },
+        {
+            "role": "Senior High School (STEM)",
+            "organization": "Lorma Colleges - Urbiztondo, San Juan, La Union",
+            "period": "2023 - 2025",
+            "description": "GWA: 90% | Studied under Science, Technology, Engineering, and Mathematics (STEM)"
+        },
+        {
+            "role": "Junior High School",
+            "organization": "Lorma Colleges - Urbiztondo, San Juan, La Union",
+            "period": "2018 - 2023",
+            "description": "GWA: 88%"
+        },
+        {
+            "role": "Elementary Education",
+            "organization": "Lorma Colleges - Urbiztondo, San Juan, La Union",
+            "period": "2012 - 2018",
+            "description": "GWA: 87%"
+        }
+    ]
+};
+
 fetch('data.json')
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response error');
         }
         return response.json();
     })
@@ -55,7 +128,9 @@ fetch('data.json')
         populateTimeline(data.educationExperience);
     })
     .catch(error => {
-        console.error('Error fetching data:', error);
+        populateSkills(fallbackPortfolioData.skills);
+        populateProjects(fallbackPortfolioData.projects);
+        populateTimeline(fallbackPortfolioData.educationExperience);
     });
 
 function populateSkills(skills) {
@@ -97,7 +172,8 @@ function populateProjects(projects) {
             return `
                 <article class="project-card">
                     <div class="project-img-wrapper">
-                        <img src="${proj.image}" alt="${proj.title}" loading="lazy">
+                        <img src="${proj.image}" alt="${proj.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" loading="lazy">
+                        <div class="img-fallback" style="display:none; width:100%; height:100%; background:#e2e8f0; align-items:center; justify-content:center; color:#64748b; font-size:0.9rem;">💻 No Image found</div>
                     </div>
                     <div class="project-details">
                         <h3>${proj.title}</h3>

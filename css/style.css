@@ -1,7 +1,7 @@
 :root {
     --color-primary: #374151;
     --color-secondary: #4b5563;
-    --color-accent: #ab833f; /* Darkened gold slightly to improve accessibility contrast ratios */
+    --color-accent: #ab833f;
     --color-accent-hover: #8e6a2d;
     --bg-primary: #e8eff6;
     --bg-secondary: #f3f7fa;
@@ -291,6 +291,28 @@ ol {
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border-color);
+    position: relative;
+    background-color: #ffffff;
+    display: block;
+    min-height: 380px;
+}
+
+#hero-avatar::before {
+    content: "📷 Profile Picture Not Found";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e2e8f0;
+    color: #4b5563;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 12px;
 }
 
 #hero-avatar-placeholder {
@@ -698,7 +720,6 @@ ol {
     padding: 0;
 }
 
-/* Success Alert Styles */
 .form-feedback {
     margin-top: 1rem;
     font-weight: 600;
